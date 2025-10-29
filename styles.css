@@ -46,7 +46,7 @@ a {
 .main-header {
     /* Mantenemos la altura y estilos de fondo */
     height: 100vh;
-    background-image: url('/img/portada.png');
+    background-image: url('img/portada.png');
     background-size: cover;
     background-position: center 30%;
     position: relative; /* Esencial */
@@ -501,3 +501,4 @@ a {
     .social-icons { margin-top: 10px; }
     .social-icons a { margin: 0 5px; }
 }
+
