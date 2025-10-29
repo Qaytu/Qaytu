@@ -1,0 +1,503 @@
+/* Paleta de Colores Inspirada */
+:root {
+    --color-beige: #f5f4e7;
+    --color-green: #90a880; /* Verde oliva/salvia */
+    --color-light-green: #dcf2c1; /* Verde claro */
+    --color-dark-gray: #333;
+    --color-accent-red: #c94042; /* Rojo vibrante de los textiles */
+    --color-nav-bar: #8b4513; 
+
+    /* Variable necesaria para la animación (aunque simplificamos a -50%) */
+    --num-cards-in-slider: 8; 
+}
+/* --------------------
+   AJUSTE GLOBAL PARA ANCLAS DE NAVEGACIÓN
+   -------------------- */
+
+html {
+    /* CLAVE: Deja un espacio libre en la parte superior (padding) igual a la altura del header fijo (aprox. 80px)
+       cuando el navegador salta a un ID de anclaje (#seccion). */
+    scroll-padding-top: 80px; 
+    
+    /* Opcional: Esto hace que el desplazamiento entre secciones sea suave, no un salto brusco. */
+    scroll-behavior: smooth;
+}
+/* Estilos Globales y Tipografía */
+* {
+    box-sizing: border-box; /* CLAVE para el carrusel y cuadrículas */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-dark-gray);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --------------------
+   CABECERA PRINCIPAL (HEADER)
+   -------------------- */
+.main-header {
+    /* Mantenemos la altura y estilos de fondo */
+    height: 100vh;
+    background-image: url('/img/portada.png');
+    background-size: cover;
+    background-position: center 30%;
+    position: relative; /* Esencial */
+    /* ... otros estilos ... */
+    
+    /* CLAVE: Empujar el contenido hacia abajo para evitar que se solape */
+    padding-top: 80px; /* Ajusta este valor (80px) al alto real de tu barra de navegación */
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    color: white;
+    background-color: var(--color-nav-bar);
+    
+    /* --- CAMBIOS CLAVE PARA LA POSICIÓN FIJA --- */
+    position: fixed; /* Mantiene la barra en el viewport */
+    top: 0; /* Fija la barra en la parte superior del viewport */
+    width: 100%; /* Asegura que ocupe todo el ancho de la página */
+    z-index: 1000; /* Asegura que la barra esté siempre por encima del resto del contenido */
+
+    /* position: absolute; y z-index: 100; que tenías antes deben ser eliminados/reemplazados */
+}
+
+.nav-bar .logo img {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.nav-bar nav a {
+    margin-left: 30px;
+    font-weight: 300;
+    
+    /* CAMBIOS CLAVE */
+    display: inline-block; /* Permite que el padding y el background funcionen correctamente */
+    padding: 5px 10px; /* Añade un poco de espacio alrededor del texto */
+    border-radius: 4px; /* Opcional: bordes suaves */
+    transition: background-color 0.3s ease; /* Transición suave de 0.3 segundos */
+}
+.nav-bar nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Blanco semitransparente (sutil) */
+    /* Opcional: color sólido y vibrante */
+    /* background-color: var(--color-accent-red); */ 
+}
+.hero-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 30px 5%;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo-hero img {
+    height: 150px;
+    width: auto;
+}
+
+
+/* --------------------
+   SECCIÓN ABOUT US
+   -------------------- */
+.about-us {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.about-us h2 {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+}
+
+.about-us .text-box {
+    background-color: var(--color-beige);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.about-us .text-box p {
+    font-size: 0.9em;
+    text-align: justify;
+}
+
+/* --------------------
+   CUADRÍCULA DE PRODUCTOS
+   -------------------- */
+.products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+    width: 100%;
+    margin-top: 50px;
+}
+
+.reservation-section.products-grid {
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.grid-item {
+    height: 400px; 
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* --- Bloques de Color y Texto --- */
+.color-beige { background-color: var(--color-beige); }
+.color-light-green { background-color: var(--color-light-green); }
+.color-green { background-color: var(--color-green); }
+
+.info-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    padding: 20px;
+}
+
+.info-box h3 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.info-box p {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.btn-more {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: transparent;
+    color: var(--color-dark-gray);
+    border: 2px solid var(--color-dark-gray);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-more:hover {
+    background-color: var(--color-dark-gray);
+    color: white;
+}
+
+.color-green .info-box * { color: white; }
+.color-green .btn-more { border: 2px solid white; color: white; }
+.color-green .btn-more:hover { background-color: white; color: var(--color-dark-gray); }
+
+
+/* --- Bloques de Imagen --- */
+.item-image {
+    background-size: cover;
+    background-position: center;
+} 
+.image-table-runner { background-image: url('img/foto1.png'); background-position: left center; }
+.image-cushion { background-image: url('img/foto2.png'); background-position: left center; }
+.image-blanket-top { background-image: url('img/foto3.png'); }
+.image-blanket-bottom { background-image: url('img/foto1.png'); }
+
+
+/* --------------------
+   CARRUSEL DE PRODUCTOS (Slider)
+   -------------------- */
+.carousel-section {
+    width: 100%;
+    background-color: var(--color-beige); 
+    padding: 60px 0;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 1200px; /* Este es el ancho de referencia */
+    margin: 0 auto;
+    overflow: hidden; 
+}
+
+
+
+.carousel-container h3 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--color-dark-gray);
+}
+
+.nav-arrow { display: none; } /* Ocultar flechas para animación CSS */
+
+.product-slider {
+    display: flex; 
+    gap: 0; 
+    margin: 0;
+    
+    /* CORRECCIÓN 1: Definimos un ancho fijo (el doble del max-width del contenedor) */
+    width: 2400px; /* 1200px * 2 */ 
+
+    animation: scrolling 25s linear infinite; 
+}
+
+.product-slider:hover {
+    animation-play-state: paused;
+}
+
+.product-card {
+    flex-shrink: 0;
+    
+    /* CORRECCIÓN 2: Aseguramos que el ancho sea el 25% del contenedor VISIBLE (1200px), 
+       pero forzamos que el ancho total del slider sea 2400px */
+    width: 300px; /* 1200px / 4 tarjetas = 300px por tarjeta */
+    
+    padding: 0 15px; 
+    text-align: center;
+    /* box-sizing: border-box; ya está definido en * {} */
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.product-card p {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.product-card .price {
+    color: var(--color-accent-red);
+    font-size: 1.1em;
+}
+
+/* --------------------
+   ANIMACIÓN KEYFRAMES (CORREGIDO)
+   -------------------- */
+@keyframes scrolling {
+    0% {
+        transform: translateX(0);
+    }
+    
+    100% {
+        /* CORRECCIÓN 3: El 50% de desplazamiento se mantiene. 
+           Si el ancho total es 2400px, -50% es -1200px, 
+           que es exactamente el ancho de las 4 tarjetas y evita el salto. */
+        transform: translateX(-50%); 
+    }
+}
+
+
+/* --------------------
+   SECCIÓN FINAL / FOOTER
+   -------------------- */
+.main-footer {
+    background-color: var(--color-dark-gray);
+    color: white;
+    padding: 50px 5%;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.footer-col h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--color-light-green);
+}
+
+.footer-col p, .footer-col li {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.footer-col ul { list-style: none; }
+
+.footer-col a {
+    display: block;
+    padding: 5px 0;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover { color: var(--color-light-green); }
+
+.footer-logo { height: 40px; margin-bottom: 15px; }
+
+.social-icons {
+    display: flex; 
+    gap: 15px; 
+    margin-top: 15px; 
+    
+    /* CLAVE: Alinea el grupo de iconos a la izquierda (inicio) */
+    justify-content: flex-start; 
+
+    /* IMPORTANTE: Si el pie de página es móvil, también puedes querer aplicar esto en el @media */
+}
+
+.social-icons a {
+    /* Mantenemos Flexbox para el centrado del icono */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    
+    width: 50px; 
+    height: 50px; 
+    
+    /* El line-height y text-align ya no son necesarios */
+    /* line-height: 50px; <-- Elimínalo */
+    /* text-align: center; <-- Elimínalo */
+    
+    border: 1px solid white;
+    border-radius: 50%;
+    margin-right: 0; /* Lo ponemos en 0 si estamos usando 'gap' en el padre */
+    
+    color: white; 
+    transition: background-color 0.3s, color 0.3s;
+}
+.social-icons a i {
+    font-size: 1.8em; /* Asegúrate de que el tamaño sea el deseado */
+    /* vertical-align: middle; ya no es necesario por Flexbox */
+}
+.social-icons a:hover {
+    background-color: white;
+    color: var(--color-dark-gray); /* Invierte los colores al pasar el ratón */
+}
+
+/* --------------------
+   ESTILOS DE PÁGINA "EN CONSTRUCCIÓN" (subpagina.html)
+   -------------------- */
+
+#under-construction {
+    /* Asegura que el contenido ocupe la mayor parte de la altura visible */
+    min-height: calc(100vh - 200px); /* 100vh menos el alto del header y footer */
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    text-align: center;
+    background-color: var(--color-light-beige); /* Usando un color de tu paleta */
+}
+
+.maintenance-box {
+    max-width: 600px;
+    padding: 40px;
+    border: 2px solid var(--color-brown);
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.maintenance-box h1 {
+    font-size: 2.5em;
+    color: var(--color-dark-brown); 
+    margin-bottom: 20px;
+}
+
+.maintenance-box p {
+    font-size: 1.1em;
+    color: var(--color-dark-gray);
+    margin-bottom: 15px;
+}
+
+/* Estilo para el elemento temático (icono) */
+.artisan-animation i {
+    font-size: 4em; /* Icono grande */
+    color: var(--color-green); /* Un color que contraste */
+    margin: 30px 0;
+    
+    /* CLAVE: Asegurar que la animación se aplique */
+    animation: pulse 2s infinite; 
+    
+    /* El "fas fa-hand-holding-box" (o el icono que elijas) ahora se animará. */
+}
+
+
+/* Botón de regreso */
+.btn-back {
+    display: inline-block;
+    background-color: var(--color-brown);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-back:hover {
+    background-color: var(--color-dark-brown);
+}
+
+/* El Keyframes (@keyframes pulse) debe estar correctamente definido en tu styles.css: */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+/* --------------------
+   RESPONSIVE (Ajuste para móviles)
+   -------------------- */
+@media (max-width: 768px) {
+    /* Header/Nav */
+    .nav-bar nav { display: none; }
+    .nav-bar { justify-content: center; }
+
+    /* Grid */
+    .products-grid { grid-template-columns: 1fr; }
+    .grid-item { height: 300px; }
+
+    /* Carrusel */
+    .product-slider {
+        /* CORRECCIÓN 4: Redefinir ancho del slider para móvil */
+        /* Si el contenedor móvil es ~100% del viewport (ej. 400px), el slider debe ser el doble (ej. 800px) */
+        width: calc(200vw); /* Usamos 200vw como solución responsiva, o 200% y confiamos en la media query. */
+    }
+    .product-card {
+        /* CORRECCIÓN 5: En móvil, cada tarjeta es 50% del contenedor visible, por lo que 
+           debe ser 25% del ancho total (8 tarjetas) del slider. */
+        width: 25%; /* 25% del 200% del ancho visible = 50% del ancho visible */
+    }
+
+    @keyframes scrolling {
+        100% {
+            /* El 50% de desplazamiento se mantiene para el bucle perfecto */
+            transform: translateX(-50%); 
+        }
+    }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .logo-col { order: 3; }
+    .social-icons { margin-top: 10px; }
+    .social-icons a { margin: 0 5px; }
+}
